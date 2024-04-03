@@ -449,7 +449,22 @@ def transform_option_value(value: str):
 
 
 def redis_queue_length(connection, queue: str) -> int:
-    return connection.default_channel.client.llen(queue)
+
+    # Check celery queues based on worker separator & priority steps
+    #separator = '\x06\x16'
+    #if 'sep' in self.app.conf["broker_transport_options"]:
+    #    separator = self.app.conf["broker_transport_options"]['sep']
+    #if 'priority_steps' in self.app.conf["broker_transport_options"]:
+    #    for queue in self.queue_cache:
+    #        for step in self.app.conf['broker_transport_options']['priority_steps']:
+    #            self.queue_cache.add(f'{queue}{separator}{str(step)}')
+
+    # Flower style - we sum the different priority queues
+    separator = '\x06\x16'
+    priority_steps = [0, 3, 6, 9]
+    queue_names = [ queue + separator + str(pri) for pri in priority_steps ]
+    queue_names.append(queue)
+    return sum((connection.default_channel.client.llen(x) for x in queue_names))
 
 
 def rabbitmq_queue_length(connection, queue: str) -> int:
