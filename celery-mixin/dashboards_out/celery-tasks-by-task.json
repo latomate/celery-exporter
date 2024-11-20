@@ -555,9 +555,9 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "includeAll": false,
+            "includeAll": true,
             "label": "Queue Name",
-            "multi": false,
+            "multi": true,
             "name": "queue_name",
             "query": "label_values(celery_task_received_total{namespace=\"$namespace\", job=\"$job\", name!~\"None\"}, queue_name)",
             "refresh": 2,
@@ -569,7 +569,7 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "includeAll": false,
+            "includeAll": true,
             "label": "Task",
             "multi": true,
             "name": "task",
@@ -581,7 +581,7 @@
       ]
    },
    "time": {
-      "from": "now-2d",
+      "from": "now-3h",
       "to": "now"
    },
    "timezone": "utc",

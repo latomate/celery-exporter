@@ -72,8 +72,8 @@ local tbOverride = tbStandardOptions.override;
       query.withDatasourceFromVariable(datasourceVariable) +
       query.withSort(1) +
       query.generalOptions.withLabel('Queue Name') +
-      query.selectionOptions.withMulti(false) +
-      query.selectionOptions.withIncludeAll(false) +
+      query.selectionOptions.withMulti(true) +
+      query.selectionOptions.withIncludeAll(true) +
       query.refresh.onLoad() +
       query.refresh.onTime(),
 
@@ -86,7 +86,7 @@ local tbOverride = tbStandardOptions.override;
       query.withSort(1) +
       query.generalOptions.withLabel('Task') +
       query.selectionOptions.withMulti(true) +
-      query.selectionOptions.withIncludeAll(false) +
+      query.selectionOptions.withIncludeAll(true) +
       query.refresh.onLoad() +
       query.refresh.onTime(),
 
@@ -506,7 +506,7 @@ local tbOverride = tbStandardOptions.override;
       dashboard.withTags($._config.tags) +
       dashboard.withTimezone('utc') +
       dashboard.withEditable(true) +
-      dashboard.time.withFrom('now-2d') +
+      dashboard.time.withFrom('now-3h') +
       dashboard.time.withTo('now') +
       dashboard.withVariables(variables) +
       dashboard.withLinks(
